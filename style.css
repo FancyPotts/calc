@@ -1,9 +1,50 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
 .body {
     display: flex;
+    border: 1px solid blue;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc {
+    display: flex;
+    border: 1px solid red;
+    height: 300px;
+    width: 250px;
+    flex-direction: column;
+}
+
+#display {
+    display: flex;
+    border: 1px solid green;
+    min-height: 40px;
+    margin: 5px;
+
+}
+
+#buttons {
+    display: flex;
+}
+#op-func {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+}
+
+#numbers {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 button {
     display: flex;
-    height: 50px;
     width: 50px;
+    height: 50px;
 }
