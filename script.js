@@ -1,6 +1,6 @@
 let number = '';
 let firstNum;
-let operator;
+let operator = '';
 let secondNum;
 
 const sum = (a, b) => a + b;
@@ -9,17 +9,23 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 const display = document.querySelector("#display");
 const numButtons = document.querySelectorAll('.num');
-const opButtons = document.querySelector('.operate');
+const opButtons = document.querySelectorAll('.operate');
 
 numButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const value = button.textContent;
-    number += value;
-    console.log(number);
-  });
+    button.addEventListener('click', () => {
+        const value = button.textContent;
+        number += value;
+        console.log(number);
+    });
 });
 
-
+opButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.textContent;
+        operator = value;
+        console.log(operator)
+    });
+});
 
 function operate(firstNum, operator, secondNum) {
     if (operator === "*") {
