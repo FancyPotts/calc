@@ -12,6 +12,7 @@ const display = document.getElementById("display");
 const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
 const equals = document.getElementById('equal');
+const clear = document.getElementById('clear');
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -27,20 +28,27 @@ opButtons.forEach(button => {
         operator = button.textContent;
         console.log(operator)
         firstNum = number;
-        number = 0;
         numberString = '';
         console.log(firstNum)
         display.textContent = number;
     });
 });
 
+clear.addEventListener('click', () => {
+    firstNum = 0;
+    secondNum = 0;
+    number = 0;
+    numberString = '';
+    display.textContent = firstNum;
+})
+
 equals.addEventListener('click', () => {
     secondNum = number;
-    result = operate(firstNum, operator, secondNum)
-    display.textContent = result;
+    firstNum = operate(firstNum, operator, secondNum)
+    display.textContent = firstNum;
+    number = firstNum;
+    numberString = '';
 });
-
-// TODO: ** Make function for operator switch number to firstNum if empty and start new string for secondNum, if new operator instead of equal is used, put result into firstNum and empty secondNum.
 
 function operate(firstNum, operator, secondNum) {
     if (operator === "*") {
@@ -57,3 +65,4 @@ function operate(firstNum, operator, secondNum) {
     }
 }
 
+// Make a display of previous input and operator
