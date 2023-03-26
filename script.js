@@ -1,31 +1,46 @@
-let number = '';
-let firstNum;
+let numberString = '';
+let number = 0;
+let firstNum = 0;
 let operator = '';
-let secondNum;
+let secondNum = 0;
 
 const sum = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
-const display = document.querySelector("#display");
+const display = document.getElementById("display");
 const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
+const equals = document.getElementById('equal');
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.textContent;
-        number += value;
-        console.log(number);
+        numberString += value;
+        number = parseInt(numberString);
+        display.textContent = number;
     });
 });
 
 opButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const value = button.textContent;
-        operator = value;
+        operator = button.textContent;
         console.log(operator)
+        firstNum = number;
+        number = 0;
+        numberString = '';
+        console.log(firstNum)
+        display.textContent = number;
     });
 });
+
+equals.addEventListener('click', () => {
+    secondNum = number;
+    result = operate(firstNum, operator, secondNum)
+    display.textContent = result;
+});
+
+// TODO: ** Make function for operator switch number to firstNum if empty and start new string for secondNum, if new operator instead of equal is used, put result into firstNum and empty secondNum.
 
 function operate(firstNum, operator, secondNum) {
     if (operator === "*") {
@@ -41,3 +56,4 @@ function operate(firstNum, operator, secondNum) {
         return subtract(firstNum, secondNum)
     }
 }
+
