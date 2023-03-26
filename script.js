@@ -1,11 +1,25 @@
+let number = '';
+let firstNum;
+let operator;
+let secondNum;
+
 const sum = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
+const display = document.querySelector("#display");
+const numButtons = document.querySelectorAll('.num');
+const opButtons = document.querySelector('.operate');
 
-let firstNum;
-let operator;
-let secondNum;
+numButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.textContent;
+    number += value;
+    console.log(number);
+  });
+});
+
+
 
 function operate(firstNum, operator, secondNum) {
     if (operator === "*") {
