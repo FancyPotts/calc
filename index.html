@@ -14,7 +14,12 @@
 <body>
     <div class="body">
         <div class="calc">
-            <div id="display"></div>
+
+            <div id="previousDisplay"></div>
+            <div id="display">
+                <div id="previousDisplay"></div>
+                <div id="currentDisplay"></div>
+            </div>
             <div id="buttons">
                 <div id="numbers">
                     <button class="num">1</button>
@@ -27,7 +32,8 @@
                     <button class="num">8</button>
                     <button class="num">9</button>
                     <button class="num">0</button>
-                    <button class="num">.</button>
+                    <button class="num">.</button> <!-- Added decimal -->
+                    <button id="del">Del</button>
                     <button id="clear">C</button>
                 </div>
                 <div id="op-func">

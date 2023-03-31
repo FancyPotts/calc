@@ -3,18 +3,22 @@ let number = 0;
 let firstNum = 0;
 let operator = '';
 let secondNum = 0;
+// Add boolean value for if firstNum is already used, operator already used, and secondNum is already used, and second operator has been used.
 
 const sum = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-const display = document.getElementById("display");
+const currentDisplay = document.getElementById("currentDisplay");
+const previousDisplay = document.getElementById("previousDisplay")
 const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
 const equals = document.getElementById('equal');
 const clear = document.getElementById('clear');
+const del = document.getElementById('del');
 
+// Change parseNum to parseFloat
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.textContent;
@@ -33,13 +37,19 @@ opButtons.forEach(button => {
     });
 });
 
+del.addEventListener('click', () => {
+    numberString = numberString.slice(0, -1);
+    number = parseFloat(numberString)
+    display.textContent = number;
+});
+
 clear.addEventListener('click', () => {
     firstNum = 0;
     secondNum = 0;
     number = 0;
     numberString = '';
     display.textContent = number;
-})
+});
 
 equals.addEventListener('click', () => {
     secondNum = number;
@@ -65,7 +75,6 @@ function operate(firstNum, operator, secondNum) {
 }
 
 // TODO: 1) Make a display of previous input and current operator
-// TODO: 2) Add decimals
-// TODO: 3) Backspace
-// TODO: 4) Keyboard support
-// TODO: 5) History, button memory based on each output
+// TODO: 2) Backspace
+// TODO: 3) Keyboard support
+// TODO: 4) History, button memory based on each output
