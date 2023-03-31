@@ -38,9 +38,13 @@ opButtons.forEach(button => {
 });
 
 del.addEventListener('click', () => {
-    numberString = numberString.slice(0, -1);
-    number = parseFloat(numberString)
-    display.textContent = number;
+    if (number > 0 || number < 0) {
+        numberString = numberString.slice(0, -1);
+        number = parseFloat(numberString)
+        display.textContent = number;
+    } else {
+        return
+    }
 });
 
 clear.addEventListener('click', () => {
@@ -75,6 +79,5 @@ function operate(firstNum, operator, secondNum) {
 }
 
 // TODO: 1) Make a display of previous input and current operator
-// TODO: 2) Backspace
-// TODO: 3) Keyboard support
-// TODO: 4) History, button memory based on each output
+// TODO: 2) Keyboard support
+// TODO: 3) History, button memory based on each output
