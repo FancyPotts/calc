@@ -15,7 +15,6 @@ const currentDisplay = document.getElementById("currentDisplay");
 const previousDisplay = document.getElementById("previousDisplay")
 const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
-const button = document.querySelectorAll('button');
 const equals = document.getElementById('equal');
 const clear = document.getElementById('clear');
 const del = document.getElementById('del');
@@ -26,7 +25,6 @@ numButtons.forEach(button => {
         numberString += value;
         number = parseFloat(numberString);
         currentDisplay.textContent = number;
-        clear.textContent = 'C';
     });
 });
 
@@ -52,28 +50,29 @@ del.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    if (numberString === '') {
+    if (numberString === '0') {
         firstNum = 0;
         secondNum = 0;
         number = 0;
         numberString = '0';
         calcHistory = [];
         logged = '';
-        currentDisplay.textContent = 0;
+        currentDisplay.textContent = number;
         previousDisplay.textContent = '';
     } else {
         numberString = '0';
         currentDisplay.textContent = 0;
-        clear.textContent = 'AC';
     }
 });
 
 equals.addEventListener('click', () => {
     secondNum = number;
     logged = firstNum + operator + secondNum;
-    calcHistory.push(logged);
     previousDisplay.textContent = logged;
     firstNum = operate(firstNum, operator, secondNum);
+    logged = logged + '=' + firstNum;
+    calcHistory.push(logged);
+    console.log(calcHistory)
     currentDisplay.textContent = firstNum;
     number = firstNum;
     numberString = '0';
@@ -97,6 +96,9 @@ function operate(firstNum, operator, secondNum) {
 
 // TODO: 1) Keyboard support
 // TODO: 2) History based on each output and able to select them.
+//          - Add buttons at top of buttons LOG, PREV, FORW, LOAD
+//          - Make them accessible only accordingly to process of using calculator.
+//          - Make an function to handle array of array, loading and going through the array.
 
 // Mar 31
 // - Added Del button and eventlistener. 
@@ -107,4 +109,6 @@ function operate(firstNum, operator, secondNum) {
 
 // Note: I thought I could do list[-1] like in py to display last entry. Turns out that's not how it works in js, whoops. So instead I use arr[arr.length - 1] to display last entry.
 
-// Note: Del would show NaN if used on a result, so modified it so it wouldn't affect the result or show NaN and Clear has to be used. New issue: First input shows no problem going to 0, but after operator is added, it shows NaN. Solved: It was because other would return blank strings, when originally it would start with 0 in the string.
+// Note: Del would show NaN if used on a result, so modified it so it wouldn't affect the result or show NaN and Clear has to be used. New issue: First input shows no problem going to 0, but after operator is added, it shows NaN. Solved: It was because other would return blank strings, when originally the string has 0 in it.
+
+// Note: I made an array to track calculations. I realized that it would be easier to store an array of arrays so it'd be easier to reuse the expression than break down a string.
