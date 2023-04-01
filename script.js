@@ -3,7 +3,8 @@ let number = 0;
 let firstNum = 0;
 let operator = '';
 let secondNum = 0;
-// Add boolean value for if firstNum is already used, operator already used, and secondNum is already used, and second operator has been used.
+let calcHistory = [];
+let logged = '';
 
 const sum = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -18,13 +19,12 @@ const equals = document.getElementById('equal');
 const clear = document.getElementById('clear');
 const del = document.getElementById('del');
 
-// Change parseNum to parseFloat
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.textContent;
         numberString += value;
         number = parseFloat(numberString);
-        display.textContent = number;
+        currentDisplay.textContent = number;
     });
 });
 
@@ -33,7 +33,7 @@ opButtons.forEach(button => {
         operator = button.textContent;
         firstNum = number;
         numberString = '';
-        display.textContent = number;
+        currentDisplay.textContent = number;
     });
 });
 
@@ -41,7 +41,7 @@ del.addEventListener('click', () => {
     if (number > 0 || number < 0) {
         numberString = numberString.slice(0, -1);
         number = parseFloat(numberString)
-        display.textContent = number;
+        currentDisplay.textContent = number;
     } else {
         return
     }
@@ -52,13 +52,16 @@ clear.addEventListener('click', () => {
     secondNum = 0;
     number = 0;
     numberString = '';
-    display.textContent = number;
+    currentDisplay.textContent = number;
 });
 
 equals.addEventListener('click', () => {
     secondNum = number;
-    firstNum = operate(firstNum, operator, secondNum)
-    display.textContent = firstNum;
+    logged = firstNum + operator + secondNum;
+    calcHistory.push(logged);
+    previousDisplay.textContent = logged;
+    firstNum = operate(firstNum, operator, secondNum);
+    currentDisplay.textContent = firstNum;
     number = firstNum;
     numberString = '';
 });
@@ -78,6 +81,14 @@ function operate(firstNum, operator, secondNum) {
     }
 }
 
-// TODO: 1) Make a display of previous input and current operator
-// TODO: 2) Keyboard support
-// TODO: 3) History, button memory based on each output
+
+// TODO: 1) Keyboard support
+// TODO: 2) History, button memory based on each output
+
+// Mar 31
+// - Added Del button and eventlistener. 
+// - Added decimal button.
+// - Change parseNumber to parseFloat. 
+// - Add previous input and current input, build on calc log
+
+// Note: I thought I could do list[-1] like in py to display last entry. Turns out that's not how it works in js, whoops. So instead I use arr[arr.length - 1] to display last entry.
