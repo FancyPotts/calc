@@ -15,6 +15,7 @@ const currentDisplay = document.getElementById("currentDisplay");
 const previousDisplay = document.getElementById("previousDisplay")
 const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
+const button = document.querySelectorAll('button');
 const equals = document.getElementById('equal');
 const clear = document.getElementById('clear');
 const del = document.getElementById('del');
@@ -25,6 +26,7 @@ numButtons.forEach(button => {
         numberString += value;
         number = parseFloat(numberString);
         currentDisplay.textContent = number;
+        clear.textContent = 'C';
     });
 });
 
@@ -32,15 +34,17 @@ opButtons.forEach(button => {
     button.addEventListener('click', () => {
         operator = button.textContent;
         firstNum = number;
-        numberString = '';
+        numberString = '0';
         currentDisplay.textContent = number;
     });
 });
 
 del.addEventListener('click', () => {
-    if (number > 0 || number < 0) {
+    if (numberString == '0') {
+        return
+    } else if (number > 0 || number < 0 ) {
         numberString = numberString.slice(0, -1);
-        number = parseFloat(numberString)
+        number = parseFloat(numberString);
         currentDisplay.textContent = number;
     } else {
         return
@@ -48,11 +52,20 @@ del.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    firstNum = 0;
-    secondNum = 0;
-    number = 0;
-    numberString = '';
-    currentDisplay.textContent = number;
+    if (numberString === '') {
+        firstNum = 0;
+        secondNum = 0;
+        number = 0;
+        numberString = '0';
+        calcHistory = [];
+        logged = '';
+        currentDisplay.textContent = 0;
+        previousDisplay.textContent = '';
+    } else {
+        numberString = '0';
+        currentDisplay.textContent = 0;
+        clear.textContent = 'AC';
+    }
 });
 
 equals.addEventListener('click', () => {
@@ -63,7 +76,7 @@ equals.addEventListener('click', () => {
     firstNum = operate(firstNum, operator, secondNum);
     currentDisplay.textContent = firstNum;
     number = firstNum;
-    numberString = '';
+    numberString = '0';
 });
 
 function operate(firstNum, operator, secondNum) {
@@ -83,12 +96,15 @@ function operate(firstNum, operator, secondNum) {
 
 
 // TODO: 1) Keyboard support
-// TODO: 2) History, button memory based on each output
+// TODO: 2) History based on each output and able to select them.
 
 // Mar 31
 // - Added Del button and eventlistener. 
 // - Added decimal button.
 // - Change parseNumber to parseFloat. 
 // - Add previous input and current input, build on calc log
+// - Improve on appearance
 
 // Note: I thought I could do list[-1] like in py to display last entry. Turns out that's not how it works in js, whoops. So instead I use arr[arr.length - 1] to display last entry.
+
+// Note: Del would show NaN if used on a result, so modified it so it wouldn't affect the result or show NaN and Clear has to be used. New issue: First input shows no problem going to 0, but after operator is added, it shows NaN. Solved: It was because other would return blank strings, when originally it would start with 0 in the string.

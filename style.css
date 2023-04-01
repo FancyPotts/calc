@@ -3,6 +3,7 @@ body {
     min-height: 100vh;
     margin: 0;
     overflow: hidden;
+    font-size: large;
 }
 
 .body {
@@ -15,36 +16,41 @@ body {
 
 .calc {
     display: flex;
-    border: 1px solid red;
-    height: 325px;
+    border: 2px solid rgb(98, 97, 97);
     width: 250px;
+    padding-bottom: 5px;
     flex-direction: column;
+    border-radius: 10px;
+    background-color: rgb(70, 69, 69);
+    padding: 5px;
+    padding-bottom: 15px;
 }
 
 #display {
     display: flex;
     border: 1px solid black;
-    max-height: 40px;
-    min-height: 35px;
+    min-height: 45px;
     margin: 5px;
     justify-content: right;
-    align-items: center;
     padding: 5px;
+    padding-inline: 8px;
     flex: 1;
     flex-direction: column;
+    border-radius: 5px;
+    background-color: rgba(143, 139, 1, 0.6)
 }
 
 #currentDisplay {
     display: flex;
     justify-content: right;
-    border: 1px solid red;
+    align-items: flex-end;
     flex: 1;
 }
 
 #previousDisplay {
     display: flex;
     justify-content: left;
-    border: 1px solid green;
+    align-items: flex-start;
     flex: 1;
 }
 
@@ -55,22 +61,22 @@ body {
 #op-func {
     display: flex;
     flex-wrap: wrap;
-    max-width: 60px;
-    padding-inline: 7px;
+    margin-right: 5px;
 }
 
 #numbers {
     display: flex;
     flex-wrap: wrap;
     margin-left: 5px;
-    gap: 5px;
 }
 
 button {
     display: flex;
     flex: 1 1 50px;
     height: 50px;
-
+    margin: 2px;
+    border-radius: 3px;
+    border: 1px solid black;
 }
 
 #clear {
