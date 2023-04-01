@@ -61,7 +61,7 @@ del.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    if (numberString === '0' && previousDisplay.textContent === 'Press C again to clear all data') { 
+    if (numberString === '0' && previousDisplay.textContent === 'Press C again to clear all') { 
         firstNum = 0;
         secondNum = 0;
         number = 0;
@@ -72,8 +72,8 @@ clear.addEventListener('click', () => {
         previousDisplay.textContent = '';
     } else if (numberString === '0' && previousDisplay.textContent !== '' ){ 
         numberString = '0';
-        previousDisplay.textContent = 'Press C again to clear all data';
-        currentDisplay.textContent = 'else press Curr to keep data';
+        previousDisplay.textContent = 'Press C again to clear all';
+        currentDisplay.textContent = 'else press Curr to keep';
     } else {
         numberString = '0';
         currentDisplay.textContent = 0;
