@@ -62,16 +62,16 @@ del.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    if (numberString === '0' && previousDisplay.textContent === 'Clear all data? Press C again.') { 
+    if (numberString === '0' && previousDisplay.textContent === 'Clear all data? Press C again') { 
         firstNum = 0;
         secondNum = 0;
         number = 0;
         numberString = '0';
         calcHistory = [];
         logged = {};
-        currentDisplay.textContent = number;
+        currentDisplay.textContent = 0;
         previousDisplay.textContent = '';
-    } else if (numberString === '0' && previousDisplay.textContent !== 'Clear all data? Press C again.'){ 
+    } else if (numberString === '0' && previousDisplay.textContent !== '' ){ 
         numberString = '0';
         previousDisplay.textContent = 'Clear all data? Press C again';
         currentDisplay.textContent = 'Else press Curr to keep data';
