@@ -82,6 +82,7 @@ button {
     margin: 2px;
     border-radius: 4px;
     border: 1px solid black;
+    color: black;
 }
 
 #log > button {
