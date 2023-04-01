@@ -28,7 +28,6 @@ const del = document.getElementById('del');
 logControl.forEach(button => {
     button.addEventListener('click', () => {
         action = button.textContent;
-        console.log(action);
         history()
     })
 })
@@ -85,7 +84,6 @@ equals.addEventListener('click', () => {
     secondNum = number;
     result = operate(firstNum, operator, secondNum);
     log(firstNum, operator, secondNum, result);
-    console.log[calcHistory]
     number = calcHistory[0].result;
     currentDisplay.textContent = calcHistory[0].result;
     previousDisplay.textContent = calcHistory[0].firstNum + calcHistory[0].operator + calcHistory[0].secondNum;
@@ -127,7 +125,6 @@ function history() {
                 when += 1;
                 previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum;
                 currentDisplay.textContent = calcHistory[when].result;
-                console.log(calcHistory[when]);
             } else {
                 return
             }
@@ -143,8 +140,6 @@ function history() {
             when = 0;
             previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum;
             currentDisplay.textContent = calcHistory[when].result
-            
-            console.log(calcHistory[0]);
         } else if (action === 'Load') {
             firstNum = calcHistory[when].firstNum;
             operator = calcHistory[when].operator;
@@ -162,6 +157,7 @@ function history() {
 // TODO: 1) Keyboard support
 // TODO: 2) History based on each output and able to select them.
 //          - Make them accessible only accordingly to process of using calculator.
+// TODO: 3) Find a font that matches all browsers and fits appearance of a calculator display.
 
 // Mar 31
 // - Added Del button and eventlistener. 
