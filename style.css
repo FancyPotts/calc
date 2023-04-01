@@ -3,7 +3,6 @@ body {
     min-height: 100vh;
     margin: 0;
     overflow: hidden;
-    font-size: large;
 }
 
 .body {
@@ -37,7 +36,8 @@ body {
     flex: 1;
     flex-direction: column;
     border-radius: 3px;
-    background-color: rgb(143, 138, 1)
+    background-color: rgb(143, 138, 1);
+    font-family: system-ui;
 }
 
 #log {

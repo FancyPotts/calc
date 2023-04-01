@@ -61,7 +61,7 @@ del.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    if (numberString === '0' && previousDisplay.textContent === 'Clear all data? Press C again') { 
+    if (numberString === '0' && previousDisplay.textContent === 'Press C again to clear all data') { 
         firstNum = 0;
         secondNum = 0;
         number = 0;
@@ -72,8 +72,8 @@ clear.addEventListener('click', () => {
         previousDisplay.textContent = '';
     } else if (numberString === '0' && previousDisplay.textContent !== '' ){ 
         numberString = '0';
-        previousDisplay.textContent = 'Clear all data? Press C again';
-        currentDisplay.textContent = 'Else press Curr to keep data';
+        previousDisplay.textContent = 'Press C again to clear all data';
+        currentDisplay.textContent = 'else press Curr to keep data';
     } else {
         numberString = '0';
         currentDisplay.textContent = 0;
@@ -90,6 +90,8 @@ equals.addEventListener('click', () => {
     numberString = '0';
     when = 0;
 });
+
+
 
 function operate(firstNum, operator, secondNum) {
     if (operator === "*") {
@@ -158,6 +160,7 @@ function history() {
 // TODO: 2) History based on each output and able to select them.
 //          - Make them accessible only accordingly to process of using calculator.
 // TODO: 3) Find a font that matches all browsers and fits appearance of a calculator display.
+// TODO: 4) Remove All Clear messages when using numbers instead of just Curr.
 
 // Mar 31
 // - Added Del button and eventlistener. 
