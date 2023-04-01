@@ -4,20 +4,34 @@ let firstNum = 0;
 let operator = '';
 let secondNum = 0;
 let calcHistory = [];
-let logged = '';
+let when = 0;
+let logged = {};
+let result = 0;
+let action = '';
+
 
 const sum = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-const currentDisplay = document.getElementById("currentDisplay");
-const previousDisplay = document.getElementById("previousDisplay")
-const numButtons = document.querySelectorAll('.num');
 const opButtons = document.querySelectorAll('.operate');
+const numButtons = document.querySelectorAll('.num');
+const buttons = document.querySelectorAll('button');
+const logControl = document.querySelectorAll('.log');
+const previousDisplay = document.getElementById("previousDisplay");
+const currentDisplay = document.getElementById("currentDisplay");
 const equals = document.getElementById('equal');
 const clear = document.getElementById('clear');
 const del = document.getElementById('del');
+
+logControl.forEach(button => {
+    button.addEventListener('click', () => {
+        action = button.textContent;
+        console.log(action);
+        history()
+    })
+})
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -44,21 +58,23 @@ del.addEventListener('click', () => {
         numberString = numberString.slice(0, -1);
         number = parseFloat(numberString);
         currentDisplay.textContent = number;
-    } else {
-        return
     }
 });
 
 clear.addEventListener('click', () => {
-    if (numberString === '0') {
+    if (numberString === '0' && previousDisplay.textContent === 'Clear all data? Press C again.') { 
         firstNum = 0;
         secondNum = 0;
         number = 0;
         numberString = '0';
         calcHistory = [];
-        logged = '';
+        logged = {};
         currentDisplay.textContent = number;
         previousDisplay.textContent = '';
+    } else if (numberString === '0' && previousDisplay.textContent !== 'Clear all data? Press C again.'){ 
+        numberString = '0';
+        previousDisplay.textContent = 'Clear all data? Press C again';
+        currentDisplay.textContent = 'Else press Curr to keep data';
     } else {
         numberString = '0';
         currentDisplay.textContent = 0;
@@ -67,15 +83,14 @@ clear.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     secondNum = number;
-    logged = firstNum + operator + secondNum;
-    previousDisplay.textContent = logged;
-    firstNum = operate(firstNum, operator, secondNum);
-    logged = logged + '=' + firstNum;
-    calcHistory.push(logged);
-    console.log(calcHistory)
-    currentDisplay.textContent = firstNum;
-    number = firstNum;
+    result = operate(firstNum, operator, secondNum);
+    log(firstNum, operator, secondNum, result);
+    console.log[calcHistory]
+    number = calcHistory[0].result;
+    currentDisplay.textContent = calcHistory[0].result;
+    previousDisplay.textContent = calcHistory[0].firstNum + calcHistory[0].operator + calcHistory[0].secondNum;
     numberString = '0';
+    when = 0;
 });
 
 function operate(firstNum, operator, secondNum) {
@@ -91,14 +106,62 @@ function operate(firstNum, operator, secondNum) {
     } else if (operator === "-") {
         return subtract(firstNum, secondNum)
     }
-}
+};
+
+function log(firstNum, operator, secondNum, result) {
+    logged = {
+        "firstNum": firstNum,
+        "operator": operator,
+        "secondNum": secondNum,
+        "result": result,
+    }
+    calcHistory.unshift(logged);
+};
+
+function history() {
+    if (calcHistory.length <= 1) {
+        return
+    } else {
+        if (action === 'Prev') {
+            if (when < calcHistory.length && when + 1 != calcHistory.length) {
+                when += 1;
+                previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum;
+                currentDisplay.textContent = calcHistory[when].result;
+                console.log(calcHistory[when]);
+            } else {
+                return
+            }
+        } else if (action === 'Forw') {
+            if (when === 0) {
+                return 
+            } else if (when > 0) {
+                when -= 1;
+                previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum;
+                currentDisplay.textContent = calcHistory[when].result;
+            }
+        } else if (action === 'Curr') {
+            when = 0;
+            previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum;
+            currentDisplay.textContent = calcHistory[when].result
+            
+            console.log(calcHistory[0]);
+        } else if (action === 'Load') {
+            firstNum = calcHistory[when].firstNum;
+            operator = calcHistory[when].operator;
+            secondNum = calcHistory[when].secondNum;
+            result = calcHistory[when].result;
+            log(firstNum, operator, secondNum, result);
+            number = result;
+            when = 0;
+        }
+    }
+    };
+
 
 
 // TODO: 1) Keyboard support
 // TODO: 2) History based on each output and able to select them.
-//          - Add buttons at top of buttons LOG, PREV, FORW, LOAD
 //          - Make them accessible only accordingly to process of using calculator.
-//          - Make an function to handle array of array, loading and going through the array.
 
 // Mar 31
 // - Added Del button and eventlistener. 
@@ -106,9 +169,19 @@ function operate(firstNum, operator, secondNum) {
 // - Change parseNumber to parseFloat. 
 // - Add previous input and current input, build on calc log
 // - Improve on appearance
+// - Add log buttons
+// April 1
+// - Change history to array of objects and refactor code accordingly
+// - Add function to access history
+// - Made history function, log function all that jazz work.
+// - Add warning prompt and to press clear again for AC function.
 
 // Note: I thought I could do list[-1] like in py to display last entry. Turns out that's not how it works in js, whoops. So instead I use arr[arr.length - 1] to display last entry.
 
 // Note: Del would show NaN if used on a result, so modified it so it wouldn't affect the result or show NaN and Clear has to be used. New issue: First input shows no problem going to 0, but after operator is added, it shows NaN. Solved: It was because other would return blank strings, when originally the string has 0 in it.
 
-// Note: I made an array to track calculations. I realized that it would be easier to store an array of arrays so it'd be easier to reuse the expression than break down a string.
+// Note: I made an array to track calculations. I realized that it would be easier to store an array of arrays to reuse the expression than break down a string.
+
+// Note: Cannot store object from an array in a variable?
+
+// Its interesting to see how if you're not cautious, especially while refactoring code, to get unintented outputs, but with an understanding of how the process works, its easy to zero in the reason why something is happening.
