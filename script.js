@@ -77,7 +77,7 @@ clear.addEventListener('click', () => {
   } else if (numberString === '0' && previousDisplay.textContent !== '') {
     numberString = '0'
     previousDisplay.textContent = 'Press C again to clear all'
-    currentDisplay.textContent = 'else press Curr to keep'
+    currentDisplay.textContent = 'else press Current to keep'
   } else {
     numberString = '0'
     currentDisplay.textContent = 0
@@ -175,6 +175,9 @@ function history () {
 // - Add warning prompt and to press clear again for AC function.
 // - Add hover effect on buttons.
 // - Add font for display.
+// April 12
+// - Removed set from log buttons
+// - Added to eventlistener to set varibles as if being used when using history
 
 // Note: I thought I could do list[-1] like in py to display last entry. Turns out that's not how it works in js, whoops. So instead I use arr[arr.length - 1] to display last entry.
 
@@ -183,5 +186,3 @@ function history () {
 // Note: I made an array to track calculations. I realized that it would be easier to store an array of arrays to reuse the expression than break down a string.
 
 // Note: Cannot store object from an array in a variable?
-
-// Its interesting to see how if you're not cautious, especially while refactoring code, to get unintented outputs, but with an understanding of how the process works, its easy to zero in the reason why something is happening.
