@@ -90,6 +90,10 @@ button:hover {
     background-color: rgb(156, 156, 156)
 }
 
+button:active {
+    background-color: rgb(134, 130, 130)
+}
+
 #log > button {
     flex: 1;
     height: 25px;
