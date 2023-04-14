@@ -74,6 +74,7 @@ clear.addEventListener('click', () => {
     logged = {}
     currentDisplay.textContent = 0
     previousDisplay.textContent = ''
+    operator = ''
   } else if (numberString === '0' && previousDisplay.textContent !== '') {
     numberString = '0'
     previousDisplay.textContent = 'Press C again to clear all'
@@ -85,14 +86,18 @@ clear.addEventListener('click', () => {
 })
 
 equals.addEventListener('click', () => {
-  secondNum = number
-  result = operate(firstNum, operator, secondNum)
-  log(firstNum, operator, secondNum, result)
-  number = calcHistory[0].result
-  currentDisplay.textContent = calcHistory[0].result
-  previousDisplay.textContent = calcHistory[0].firstNum + calcHistory[0].operator + calcHistory[0].secondNum
-  numberString = '0'
-  when = 0
+  if (operator === '') {
+    return
+  } else {
+    secondNum = number
+    result = operate(firstNum, operator, secondNum)
+    log(firstNum, operator, secondNum, result)
+    number = calcHistory[0].result
+    currentDisplay.textContent = calcHistory[0].result
+    previousDisplay.textContent = calcHistory[0].firstNum + calcHistory[0].operator + calcHistory[0].secondNum
+    numberString = '0'
+    when = 0
+  }
 })
 
 function operate (firstNum, operator, secondNum) {
@@ -144,14 +149,6 @@ function history () {
       when = 0
       previousDisplay.textContent = calcHistory[when].firstNum + calcHistory[when].operator + calcHistory[when].secondNum
       currentDisplay.textContent = calcHistory[when].result
-    } else if (action === 'Load') {
-      firstNum = calcHistory[when].firstNum
-      operator = calcHistory[when].operator
-      secondNum = calcHistory[when].secondNum
-      result = calcHistory[when].result
-      log(firstNum, operator, secondNum, result)
-      number = result
-      when = 0
     }
   }
 };
